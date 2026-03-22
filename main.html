@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sorry 😢</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f8cdd1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        z-index: 1;
+        position: relative;
+    }
+
+    video {
+        width: 200px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .buttons {
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    .yes {
+        background: #28a745;
+        color: white;
+    }
+
+    .no {
+        background: #dc3545;
+        color: white;
+    }
+
+    .floating-yes {
+        position: absolute;
+        background: #28a745;
+        color: white;
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-size: 14px;
+        z-index: 9999;
+        white-space: nowrap;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- 🔥 Replace with your video file -->
+    <video id="sorryVideo" loop>
+        <source src="sorry.mp4" type="video/mp4">
+    </video>
+
+    <h2>I'm Sorry! 😢</h2>
+    <p>I know I messed up... Can you please forgive me?</p>
+
+    <div class="buttons">
+        <button class="yes" onclick="forgive()">Yes</button>
+        <button class="no" onclick="spawnYes()">No</button>
+    </div>
+</div>
+
+<script>
+let videoStarted = false;
+
+function playVideoWithSound() {
+    const video = document.getElementById("sorryVideo");
+    if (!videoStarted) {
+        video.muted = false;
+        video.play();
+        videoStarted = true;
+    }
+}
+
+function forgive() {
+    playVideoWithSound();
+    document.body.innerHTML = "<h1 style='color:white;'>Yay! ❤️ Thank you!!</h1>";
+}
+
+function spawnYes() {
+    playVideoWithSound();
+
+    for (let i = 0; i < 15; i++) {
+        let btn = document.createElement("button");
+        btn.innerText = "Yes";
+        btn.className = "floating-yes";
+
+        btn.style.left = Math.random() * window.innerWidth + "px";
+        btn.style.top = Math.random() * window.innerHeight + "px";
+
+        btn.onclick = forgive;
+
+        document.body.appendChild(btn);
+    }
+}
+</script>
+
+</body>
+</html>

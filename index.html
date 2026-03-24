@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sorry 😢</title>
 
 <style>
@@ -19,18 +20,30 @@
 
     .card {
         background: white;
-        padding: 30px;
+        padding: 5vw;
         border-radius: 20px;
         text-align: center;
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        width: 90%;
+        max-width: 400px;
         z-index: 1;
-        position: relative;
     }
 
     video {
-        width: 200px;
+        width: 100%;
+        max-width: 220px;
         border-radius: 10px;
         margin-bottom: 15px;
+    }
+
+    h2 {
+        font-size: 6vw;
+        max-font-size: 24px;
+    }
+
+    p {
+        font-size: 4vw;
+        max-font-size: 16px;
     }
 
     .buttons {
@@ -41,9 +54,10 @@
         padding: 10px 20px;
         border: none;
         border-radius: 20px;
-        font-size: 16px;
+        font-size: 4vw;
+        max-font-size: 16px;
         cursor: pointer;
-        margin: 10px;
+        margin: 8px;
     }
 
     .yes {
@@ -61,8 +75,8 @@
         background: #28a745;
         color: white;
         border-radius: 20px;
-        padding: 8px 15px;
-        font-size: 14px;
+        padding: 6px 12px;
+        font-size: 12px;
         z-index: 9999;
         white-space: nowrap;
     }
@@ -73,7 +87,6 @@
 
 <div class="card">
 
-    <!-- 🔥 Replace with your video file -->
     <video id="sorryVideo" loop>
         <source src="sorry.mp4" type="video/mp4">
     </video>
@@ -89,6 +102,7 @@
 
 <script>
 let videoStarted = false;
+let noClicks = 0;
 
 function playVideoWithSound() {
     const video = document.getElementById("sorryVideo");
@@ -101,13 +115,21 @@ function playVideoWithSound() {
 
 function forgive() {
     playVideoWithSound();
-    document.body.innerHTML = "<h1 style='color:white;'>Yay! ❤️ Thank you!!</h1>";
+    document.body.innerHTML = "<h1 style='color:white; text-align:center;'>Yay! ❤️ Thank you!!</h1>";
 }
 
 function spawnYes() {
     playVideoWithSound();
 
-    for (let i = 0; i < 15; i++) {
+    noClicks++;
+
+    // 🔥 Exponential growth
+    let count = Math.pow(3, noClicks); 
+
+    // cap so browser doesn't crash
+    count = Math.min(count, 200);
+
+    for (let i = 0; i < count; i++) {
         let btn = document.createElement("button");
         btn.innerText = "Yes";
         btn.className = "floating-yes";
